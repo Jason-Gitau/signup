@@ -3,10 +3,10 @@ import { useState } from "react"
 import axios from "axios"
 
 const Addproducts=()=>{
-    const[product_name,setProduct_name]=useState("")
-    const[product_description,setDescription]=useState("")
-    const[cost,setCost]=useState("")
-    const[product_photo,setProduct_photo]=useState("")
+    const[name,setname]=useState("")
+    const[description,setDescription]=useState("")
+    const[quantity,setQuantity]=useState("")
+    
 
     const[loading,setLoading]=useState("")
     const[error,setError]=useState("")
@@ -18,12 +18,12 @@ const Addproducts=()=>{
         try {
             setLoading("Please wait...")
             const data= new FormData()
-            data.append("product_name",product_name)
-            data.append("product_description",product_description)
-            data.append("product_cost",cost)
-            data.append("product_photo",product_photo)
+            data.append("name",name)
+            data.append("description",description)
+            data.append("quantity",quantity)
+            
 
-            const response=await axios.post("http://mirlan.pythonanywhere.com/api/add_products",data)
+            const response=await axios.post("http://modcom2.pythonanywhere.com/api/add_product",data)
             setLoading("")
             setSuccess(response.data.message)
             
@@ -72,18 +72,17 @@ const Addproducts=()=>{
                 <h1 className="text-center">Add products</h1>
                 
                     <label htmlFor="">Product name</label><br/>
-                    <input type="text"  className="form-control mb-4" onChange={(e)=>setProduct_name(e.target.value)}/><br/>
+                    <input type="text"  className="form-control mb-4" onChange={(e)=>setname(e.target.value)}/><br/>
                     {/* bind productname */}
-                    {product_name}
+                    {name}
                     <label htmlFor="">Description</label><br/>
                     <input type="textarea" className="form-control mb-4"onChange={(e)=>setDescription(e.target.value)}/><br/>
-                    {product_description}
-                    <label htmlFor="">cost(KSH)</label><br/>
-                    <input type="number" className="form-control mb-4"onChange={(e)=>setCost(e.target.value)}/><br/>
-                    {cost}
-                    <label htmlFor="">product photo</label>
-                    <input type="file" className="form-control mb-4" onChange={(e)=>setProduct_photo(e.target.files[0])} accept="image/*"/><br/>
-                    <button className="btn btn-info w-100">Add Products</button>
+                    {description}
+                    <label htmlFor="">Quantity</label><br/>
+                    <input type="number" className="form-control mb-4"onChange={(e)=>setQuantity(e.target.value)}/><br/>
+                    {quantity}
+                    <button type="submit" className="btn btn-primary w-100">Add product</button>
+                   
 
                 </form>
             </div>
